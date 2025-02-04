@@ -14,3 +14,17 @@ pip install langchain-openai
 pip install langchain-community
 pip install langchainhub
 ```
+
+## Connecting Prompt
+
+- Prompt : Receive input
+- Chat Models : Interact with LLM
+
+```
+from langchain_core.prompts import PromptTemplate
+from langchain_openai import ChatOpenAI
+```
+
+### What are Chains ?
+
+Allow us to `combine` multiple chains together and make one application.
