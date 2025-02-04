@@ -4,7 +4,13 @@ from dotenv import load_dotenv  # .env 파일에서 환경변수를 불러오는
 
 # 🔹 LangChain 관련 모듈
 from langchain_core.prompts import PromptTemplate  # 프롬프트 템플릿을 만드는 모듈
-from langchain_openai import ChatOpenAI  # OpenAI의 LLM(Language Model)을 사용하는 모듈
+# from langchain_openai import ChatOpenAI  # OpenAI의 LLM(Language Model)을 사용하는 모듈
+# 🔹 Ollama 모델을 사용하도록 변경
+# 기존 OpenAI 기반 ChatOpenAI 대신 langchain_ollama의 ChatOllama 사용
+
+# 🔹 Output을 문자열(String)로 변환하는 파서 추가
+from langchain_ollama import ChatOllama # swap to ollama instead
+from langchain_core.output_parsers import StrOutputParser
 
 # 🔹 .env 파일 로드 (환경 변수 불러오기)
 load_dotenv()  # .env 파일에 저장된 API 키를 불러와서 환경 변수로 설정
@@ -32,17 +38,17 @@ if __name__ == "__main__":
     # 2️⃣ PromptTemplate 객체 생성
     summary_prompt_template = PromptTemplate(input_variables=['information'], template=summary_template)
 
-    # 3️⃣ OpenAI의 GPT 모델 사용 설정
-    llm = ChatOpenAI(temperature=0, model_name="gpt-4o-mini")
+    # 3️⃣ 모델 사용 설정
+    # Chat GPT 모델 사용
+    # llm = ChatOpenAI(temperature=0, model_name="gpt-4o-mini")
     # 🔹 temperature=0: 답변을 더 **일관되게** 출력하도록 설정 (값이 클수록 랜덤성이 높아짐)
-    # 🔹 model_name="gpt-4o-mini": 사용 모델 선택
+    #  model_name="gpt-4o-mini": 사용 모델 선택
+    # 🔹 Ollmam class 사용 설정
+    llm = ChatOllama(model="llama3.2")
 
-    # 4️⃣ 체인(Chain) 구성 → 프롬프트 템플릿과 LLM 연결
-    from langchain_core.chains import LLMChain  # 체인을 다루는 모듈 추가
-
-    chain = LLMChain(llm=llm, prompt=summary_prompt_template)  # LLM과 프롬프트 연결
-
-    # 5️⃣ 체인 실행 (GPT 모델에 정보 입력 및 결과 받기)
+    # 5️⃣ 체인 실행 
+    # chain = summary_prompt_template | llm
+    chain = summary_prompt_template | llm | StrOutputParser()
     res = chain.invoke(input={"information": information})
 
     # 6️⃣ 결과 출력
