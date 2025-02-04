@@ -62,3 +62,31 @@ Elon Musk is a businessman, entrepreneur, and inventor who has made significant 
 Let me know if you'd like more information!
 
 </details>
+
+## LinkedIn
+
+```bash
+linkedin_runner.py -- main
+third_parties
+ㄴ __init__.py
+ㄴ linkedin.py
+```
+
+[x] ProxyURL API
+[x] Data Clean Up
+[x] Testing
+
+# Agent
+
+Basically, Engine of Agent is LLM.
+
+- Uses LLM to find what the client wants
+- performs the tasks
+- returns results
+
+## What is Agent ?
+
+**`Agent`** is an AI that utilizes tools to accomplish objectives.
+
+- **`agent_executor`** → An object that actually executes the agent.
+- **`create_react_agent`** → A function that creates a ReAct-based agent.
