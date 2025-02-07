@@ -23,3 +23,11 @@
 ## Branches :
 
 - [4-react-frameworks](https://github.com/Jun0S2/LangChain/tree/4-react-frameworks)
+
+# Section 5
+
+## TIL
+
+- RAG, TextLoader, TextSplitter, OpenAIEmbeddings, Pinecone
+
+- [5-rag-medium-analyzer](https://github.com/Jun0S2/LangChain/tree/5-rag-medium-analyzer)
